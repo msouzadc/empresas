@@ -28,8 +28,9 @@ public class UfProcessadorLinha implements ProcessadorLinha {
 			em.getTransaction().commit();
 		
 		}catch (Exception ex){
+			em.getTransaction().rollback();
 			System.out.println(ex.getMessage());
-			
+			System.exit(0);
 		}
 
 	}

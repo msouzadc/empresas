@@ -1,8 +1,6 @@
 package br.edu.fsma.modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,13 +25,13 @@ public class Cidade  implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="uf_id", nullable = false)
 	private Uf uf;
-	@OneToMany(mappedBy = "cidade")
-	private List <Bairro> bairros = new ArrayList<>();
 	
-	public void addBairro(Bairro bairro) {
-		this.bairros.add(bairro);
-	}
-		
+//	@OneToMany(mappedBy = "cidade")
+//	private List <Bairro> bairros = new ArrayList<>();
+//	public void addBairro(Bairro bairro) {
+//		this.bairros.add(bairro);
+//	}
+//		
 	public Long getId() {
 		return id;
 	}

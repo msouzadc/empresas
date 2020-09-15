@@ -8,6 +8,10 @@ public class EmpresaCsv {
 		campos = linha.split(";");
 	}
 	
+	private String retirarAspas(String str) {  
+		return str.replaceAll("\"", "");
+	}
+	
 	public String getRamo() {
 		return campos[0];
 	}
@@ -29,11 +33,11 @@ public class EmpresaCsv {
 	}
 	
 	public String getCidade() {
-		return campos[5];
+		return retirarAspas(campos[5]).trim();
 	}
 	
 	public String getSiglaUf() {
-		return campos[6];
+		return retirarAspas(campos[6]).trim();
 	}
 	
 	public String getContato() {

@@ -1,22 +1,47 @@
 package br.edu.fsma.servicos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
+import br.edu.fsma.dao.BairroDao;
+import br.edu.fsma.dao.CidadeDao;
+import br.edu.fsma.dao.UfDao;
+import br.edu.fsma.modelo.Cidade;
+import br.edu.fsma.modelo.Uf;
+
 public class EmpresaProcessadorLinha implements ProcessadorLinha {
-	
-	private List<ProcessadorLinha> processadoresLinha = new ArrayList<>();
+	private EntityManager em;
+	private UfDao ufDao;	
+	private CidadeDao cidadeDao;
+	private BairroDao bairroDao;
 	
 	public EmpresaProcessadorLinha (EntityManager em) {
-		processadoresLinha.add(new CidadeProcessadorLinha(em));
-		//processadoresLinha.add(new BairroProcessadorLinha(em));
+		this.em=em;
+		this.ufDao = new UfDao(em);
+		this.cidadeDao = new CidadeDao (em);
+		this.bairroDao = new BairroDao(em);
+
 	}
 
 	public void processa(String linha) {
-		for (ProcessadorLinha processador : processadoresLinha) {
-			processador.processa(linha);
-		}		
+		EmpresaCsv csv = new EmpresaCsv(linha);
+		
+		try {
+			em.getTransaction().begin();
+			Uf uf = ufDao.buscarPorSigla(csv.getSiglaUf());
+			
+			if (uf == null) {
+				em.getTransaction().rollback();
+				return;
+			}
+			
+			Cidade cidade = new Cidade ();
+			cidade.setUf(uf);
+			cidade.setNome(csv.getCidade());
+			cidadeDao.inserir(cidade);
+			em.getTransaction().commit();	
+		}catch (Exception e){
+			em.getTransaction().rollback();
+			System.out.println(e.getMessage());		
+		}	
 	}	
 }

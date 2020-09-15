@@ -18,9 +18,7 @@ public class ProdutoDao implements Serializable {
 	}
 
 	public void inserir(Produto produto) {
-		em.getTransaction().begin();
 		em.persist(produto);
-		em.getTransaction().commit();
 	}
 
 }
