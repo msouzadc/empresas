@@ -8,10 +8,10 @@ public class UfCsv {
 		campo = linha.split(",");
 	}
 	public String getSigla() {
-			return campo[1].trim();
+			return campo[1].trim().toUpperCase();
 	}
 	public String getNome() {
-		return campo[0];
+		return campo[0].toUpperCase();
 	}
 
 }

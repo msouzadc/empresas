@@ -33,11 +33,11 @@ public class EmpresaCsv {
 	}
 	
 	public String getCidade() {
-		return retirarAspas(campos[5]).trim();
+		return retirarAspas(campos[5]).trim().toUpperCase();
 	}
 	
 	public String getSiglaUf() {
-		return retirarAspas(campos[6]).trim();
+		return retirarAspas(campos[6]).trim().toUpperCase();
 	}
 	
 	public String getContato() {

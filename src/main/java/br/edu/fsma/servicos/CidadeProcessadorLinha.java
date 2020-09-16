@@ -30,11 +30,15 @@ public class CidadeProcessadorLinha implements ProcessadorLinha {
 				em.getTransaction().rollback();
 				return;
 			}
-			Cidade cidade = new Cidade ();
-			cidade.setUf(uf);
-			cidade.setNome(csv.getCidade());
-			cidadeDao.inserir(cidade);
-			em.getTransaction().commit();	
+			Cidade cidade = cidadeDao.busca(uf, csv.getCidade());
+			if (cidade == null) {
+				cidade = new Cidade ();
+				cidade.setUf(uf);
+				cidade.setNome(csv.getCidade());
+				cidadeDao.inserir(cidade);
+				em.getTransaction().commit();	
+			}
+	
 		}catch (Exception e){
 			em.getTransaction().rollback();
 			System.out.println(e.getMessage());		
