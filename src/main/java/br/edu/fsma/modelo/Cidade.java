@@ -31,7 +31,7 @@ public class Cidade  implements Serializable {
 //	public void addBairro(Bairro bairro) {
 //		this.bairros.add(bairro);
 //	}
-//		
+		
 	public Long getId() {
 		return id;
 	}

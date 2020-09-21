@@ -4,8 +4,19 @@ public class EmpresaCsv {
 
 	private String campos[];
 	
+	private boolean valido;
+
+	
 	public EmpresaCsv(String linha) {
+		valido = false;
+		if (linha == null) {
+			return;
+		}
 		campos = linha.split(";");
+		if (getBairro().equals(" ")) {
+			return;
+		}
+		valido= true;
 	}
 	
 	private String retirarAspas(String str) {  
@@ -25,7 +36,7 @@ public class EmpresaCsv {
 	}
 	
 	public String getBairro() {
-		return campos[3];
+		return  retirarAspas(campos[3].trim());
 	}
 	
 	public String getCep() {
@@ -74,6 +85,10 @@ public class EmpresaCsv {
 
 	public int getColunasDisponiveis() {
 		return campos.length;
+	}
+	
+	public boolean isNaoValido() {
+		return !valido;
 	}
 
 

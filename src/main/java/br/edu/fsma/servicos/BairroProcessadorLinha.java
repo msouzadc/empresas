@@ -9,8 +9,7 @@ import br.edu.fsma.modelo.Bairro;
 import br.edu.fsma.modelo.Cidade;
 import br.edu.fsma.modelo.Uf;
 
-public class BairroProcessadorLinha implements ProcessadorLinha {
-	private EntityManager em;
+public class BairroProcessadorLinha implements ArquivoEmpresaProcessador {
 	private UfDao ufDao;	
 	private CidadeDao cidadeDao;
 	private BairroDao bairroDao;
@@ -22,35 +21,27 @@ public class BairroProcessadorLinha implements ProcessadorLinha {
 	}
 	
 	@Override
-	public void processa(String linha) {
-		EmpresaCsv csv = new EmpresaCsv(linha);
-		
-		try {
-			em.getTransaction().begin();
-			Uf uf = ufDao.buscarPorSigla(csv.getSiglaUf());
-			
-			if (uf == null) {
-				em.getTransaction().rollback();
-				return;
-			}
-						
-			Cidade cidade = cidadeDao.busca(uf, csv.getCidade());
-			if (cidade == null) {
-				em.getTransaction().rollback();
-				return;				
-			}
-			
-			Bairro bairro = bairroDao.busca(cidade, csv.getBairro());
-			if (bairro == null) {
-				bairro = new Bairro();
-				bairro.setCidade(cidade);
-				bairro.setNome(csv.getBairro());
-				bairroDao.inserir(bairro);
-			}
-			em.getTransaction().commit();
-		}catch (Exception e){
-			em.getTransaction().rollback();
-			System.out.println(e.getMessage());
+	public void processa(EmpresaCsv empresaCsv) {
+		if (empresaCsv.isNaoValido()) {
+			return;
 		}
+		
+		Uf uf = ufDao.buscarPorSigla(empresaCsv.getSiglaUf());
+		if (uf == null) {
+			return;
+		}
+						
+		Cidade cidade = cidadeDao.busca(uf, empresaCsv.getCidade());
+		if (cidade == null) {
+			return;				
+		}
+			
+		Bairro bairro = bairroDao.busca(cidade, empresaCsv.getBairro());
+		if (bairro == null) {
+			bairro = new Bairro();
+			bairro.setCidade(cidade);
+			bairro.setNome(empresaCsv.getBairro());
+			bairroDao.inserir(bairro);
+			}
 	}
 }

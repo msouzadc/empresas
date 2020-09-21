@@ -26,7 +26,7 @@ public class BairroDao implements Serializable {
 	
 	public Bairro busca (Cidade cidade, String nomeBairro) {
 		try {
-			TypedQuery<Bairro> query = em.createQuery("SELECT b FROM Bairro b WHERE b.nome = :pBairro and b.municipio = :pmunicipio", Bairro.class);
+			TypedQuery<Bairro> query = em.createQuery("SELECT b FROM Bairro b WHERE b.nome = :Bairro and b.cidade = :cidade", Bairro.class);
 			query.setParameter("Bairro", nomeBairro);
 			query.setParameter("cidade", cidade);
 			return  query.getSingleResult();

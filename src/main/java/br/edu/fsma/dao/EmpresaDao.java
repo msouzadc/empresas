@@ -15,9 +15,7 @@ public class EmpresaDao {
 	}
 
 	public void inserir(Empresa empresa) {
-		em.getTransaction().begin();
 		em.persist(empresa);
-		em.getTransaction().commit();
 	}
 	
 	public Empresa busca(String razaoSocial) {
