@@ -27,11 +27,11 @@ public class EmpresaCsv {
 	}
 	
 	public String getRazaoSocial() {
-		return campos[1];
+		return retirarAspas(campos[1]);
 	}
 	
 	public String getLogradouro() {
-		return campos[2];
+		return retirarAspas(campos[2]);
 	}
 	
 	public String getBairro() {
@@ -39,7 +39,7 @@ public class EmpresaCsv {
 	}
 	
 	public String getCep() {
-		return campos[4];
+		return retirarAspas(campos[4]);
 	}
 	
 	public String getCidade() {
@@ -51,31 +51,31 @@ public class EmpresaCsv {
 	}
 	
 	public String getContato() {
-		return campos[7];
+		return retirarAspas(campos[7]);
 	}
 	
 	public Integer getFuncionario () {
 		try {
-			return Integer.parseInt(campos[8]);
+			return Integer.parseInt(retirarAspas(campos[8]));
 		} catch(Exception e) {
 			return null;	
 		}
 	}
 		
 	public String getTelefone() {
-		return campos[9];
+		return retirarAspas(campos[9]);
 	}
 	
 	public String getFax() {
-		return campos[10];
+		return retirarAspas(campos[10]);
 	}
 	
 	public String getSite() {
-		return campos[11];
+		return retirarAspas(campos[11]);
 	}
 	
 	public String getEmail() {
-		return campos[12];
+		return retirarAspas(campos[12]);
 	}
 	
 	public String getProduto() {

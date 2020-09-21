@@ -26,11 +26,6 @@ public class Cidade  implements Serializable {
 	@JoinColumn(name="uf_id", nullable = false)
 	private Uf uf;
 	
-//	@OneToMany(mappedBy = "cidade")
-//	private List <Bairro> bairros = new ArrayList<>();
-//	public void addBairro(Bairro bairro) {
-//		this.bairros.add(bairro);
-//	}
 		
 	public Long getId() {
 		return id;

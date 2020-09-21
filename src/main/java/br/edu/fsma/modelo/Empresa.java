@@ -24,9 +24,9 @@ public class Empresa implements Serializable {
 	private String razaoSocial;
 	@Column(length = 100)
 	private String logradouro;
-	@Column(length = 8)
+	@Column(length = 10)
 	private String cep;
-	@Column(length = 15)
+	@Column(length = 20)
 	private String telefone;
 	private int funcionario;
 	@Column(length = 80)
@@ -40,10 +40,10 @@ public class Empresa implements Serializable {
 	@JoinColumn(name = "uf_id")
 	private Uf uf;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "id_cidade")
 	private Cidade cidade;
+	
 	@ManyToOne
 	@JoinColumn(name = "id_bairro")
 	private Bairro bairro;
@@ -51,6 +51,10 @@ public class Empresa implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
+	
+	@ManyToOne
+	@JoinColumn(name = "ramo_id")
+	private Ramo ramo;
 	
 	public Long getId() {
 		return id;
@@ -86,8 +90,7 @@ public class Empresa implements Serializable {
 	public int getFuncionario() {
 		return funcionario;
 	}
-	public void setFuncionario(int
-			funcionario) {
+	public void setFuncionario(int funcionario) {
 		this.funcionario = funcionario;
 	}
 	public String getSite() {
@@ -134,6 +137,13 @@ public class Empresa implements Serializable {
 	}
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	
+	public Ramo getRamo() {
+		return ramo;
+	}
+	public void setRamo(Ramo ramo) {
+		this.ramo = ramo;
 	}
 	@Override
 	public int hashCode() {
