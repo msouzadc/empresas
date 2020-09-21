@@ -6,7 +6,6 @@ public class EmpresaCsv {
 	
 	private boolean valido;
 
-	
 	public EmpresaCsv(String linha) {
 		valido = false;
 		if (linha == null) {
@@ -80,7 +79,7 @@ public class EmpresaCsv {
 	}
 	
 	public String getProduto() {
-		return campos[13];
+		return retirarAspas(campos[13]);
 	}
 
 	public int getColunasDisponiveis() {

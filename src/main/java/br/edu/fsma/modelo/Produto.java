@@ -21,26 +21,21 @@ public class Produto implements Serializable {
 	@Column()
 	private String nome;
 	
-	
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 
 	@Override
 	public int hashCode() {
@@ -79,7 +74,5 @@ public class Produto implements Serializable {
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + "]";
 	}
-	
-	
 
 }
