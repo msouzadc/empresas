@@ -3,14 +3,13 @@ package br.edu.fsma.servicos;
 import javax.persistence.EntityManager;
 
 import br.edu.fsma.dao.RamoDao;
-import br.edu.fsma.modelo.Produto;
 import br.edu.fsma.modelo.Ramo;
 
 public class RamoProcessadorLinha implements ArquivoEmpresaProcessador {
-	private RamoDao ramoDao;	
+	private RamoDao ramoDao;
 
 	public RamoProcessadorLinha (EntityManager em) {
-		this.ramoDao=new RamoDao(em);
+		this.ramoDao =new RamoDao(em);
 	}
 	
 	@Override
@@ -20,10 +19,11 @@ public class RamoProcessadorLinha implements ArquivoEmpresaProcessador {
 		}
 		
 		Ramo ramo = ramoDao.busca(empresaCsv.getRamo());
-			if (ramo == null) {
-				ramo = new Ramo();
-				ramo.setNome(empresaCsv.getProduto());
-				ramoDao.inserir(ramo);
-			}	
+		if (ramo == null) {
+			ramo = new Ramo();
+			ramo.setNome(empresaCsv.getRamo());
+			ramoDao.inserir(ramo);
+		}	
+
 	}
 }

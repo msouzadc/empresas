@@ -13,9 +13,9 @@ public class EmpresaCsvProcessadorLinha implements ProcessadorLinha {
 		this.em=em;
 		processadores.add(new CidadeProcessadorLinha(em));
 		processadores.add(new BairroProcessadorLinha(em));
-		processadores.add(new ProdutoProcessadorLinha(em));
 		processadores.add(new RamoProcessadorLinha(em));
 		processadores.add(new EmpresaProcessadorLinha(em));
+		processadores.add(new ProdutoProcessadorLinha(em));
 	}
 
 	public void processa(String linha) {

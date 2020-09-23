@@ -1,12 +1,15 @@
 package br.edu.fsma.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,9 @@ public class Produto implements Serializable {
 	private Long id;
 	@Column()
 	private String nome;
+	
+	@ManyToMany(mappedBy = "produtos")
+	private List<Empresa> empresas = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -35,6 +41,15 @@ public class Produto implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+
+	public void addEmpresa(Empresa empresa) {
+		this.empresas.add( empresa);
+		empresa.getProdutos().add(this);
 	}
 
 	@Override

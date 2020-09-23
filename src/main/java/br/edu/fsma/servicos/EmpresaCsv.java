@@ -8,14 +8,18 @@ public class EmpresaCsv {
 
 	public EmpresaCsv(String linha) {
 		valido = false;
+		
 		if (linha == null) {
 			return;
 		}
+
 		campos = linha.split(";");
-		if (getBairro().equals(" ")) {
+
+		if (campos.length < 13) { 
 			return;
 		}
-		valido= true;
+
+		valido = true;
 	}
 	
 	private String retirarAspas(String str) {  
@@ -23,7 +27,7 @@ public class EmpresaCsv {
 	}
 	
 	public String getRamo() {
-		return campos[0];
+		return retirarAspas(campos[0]);
 	}
 	
 	public String getRazaoSocial() {

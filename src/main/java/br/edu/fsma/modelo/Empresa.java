@@ -1,13 +1,17 @@
 package br.edu.fsma.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,34 +30,29 @@ public class Empresa implements Serializable {
 	private String logradouro;
 	@Column(length = 10)
 	private String cep;
-	@Column(length = 20)
+	@Column(length = 30)
 	private String telefone;
-	private int funcionario;
+	@Column(nullable = true)
+	private Integer funcionario;
 	@Column(length = 80)
 	private String site; 
 	@Column(length = 30)
 	private String email;
-	@Column(length = 15)
+	@Column(length = 30)
 	private String fax;
-	
 	@ManyToOne
 	@JoinColumn(name = "uf_id")
 	private Uf uf;
-	
 	@ManyToOne
 	@JoinColumn(name = "id_cidade")
 	private Cidade cidade;
-	
 	@ManyToOne
 	@JoinColumn(name = "id_bairro")
 	private Bairro bairro;
-	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Produto> produtos =  new ArrayList<>();
 	@ManyToOne
-	@JoinColumn(name = "id_produto")
-	private Produto produto;
-	
-	@ManyToOne
-	@JoinColumn(name = "ramo_id")
+	@JoinColumn(name = "id_ramo")
 	private Ramo ramo;
 	
 	public Long getId() {
@@ -87,10 +86,10 @@ public class Empresa implements Serializable {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public int getFuncionario() {
+	public Integer getFuncionario() {
 		return funcionario;
 	}
-	public void setFuncionario(int funcionario) {
+	public void setFuncionario(Integer funcionario) {
 		this.funcionario = funcionario;
 	}
 	public String getSite() {
@@ -130,13 +129,12 @@ public class Empresa implements Serializable {
 	public void setBairro(Bairro bairro) {
 		this.bairro = bairro;
 	}
-	
 
-	public Produto getProduto() {
-		return produto;
+	public List<Produto> getProdutos() {
+		return produtos;
 	}
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
 	}
 	
 	public Ramo getRamo() {
@@ -145,6 +143,8 @@ public class Empresa implements Serializable {
 	public void setRamo(Ramo ramo) {
 		this.ramo = ramo;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -172,8 +172,8 @@ public class Empresa implements Serializable {
 	public String toString() {
 		return "Empresa [id=" + id + ", razaoSocial=" + razaoSocial + ", logradouro=" + logradouro + ", cep=" + cep
 				+ ", telefone=" + telefone + ", funcionario=" + funcionario + ", site=" + site + ", email=" + email
-				+ ", fax=" + fax + ", uf=" + uf + ", cidade=" + cidade + ", bairro=" + bairro + ", produto=" + produto
-				+ "]";
+				+ ", fax=" + fax + ", uf=" + uf + ", cidade=" + cidade + ", bairro=" + bairro + ", produtos=" + produtos
+				+ ", ramo=" + ramo + "]";
 	}
-	
+
 }

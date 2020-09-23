@@ -16,12 +16,13 @@ import javax.persistence.Table;
 @Table (name = "tb_ramo")
 public class Ramo implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column()
 	private String nome;
-	
 	@OneToMany(mappedBy = "ramo")
 	private List<Empresa> empresas = new ArrayList<>();
 	
